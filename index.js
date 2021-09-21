@@ -137,16 +137,30 @@ const getDogPic = async () => {
     const data = await readFilePro(`${__dirname}/dog.txt`);
     console.log(`Breed: ${data}`);
 
+    // * single promise
     const res = await superagent.get(
       `https://dog.ceo/api/breed/${data}/images/random`
     );
+
     console.log(res.body.message);
 
     await writeFilePro('dog-img.txt', res.body.message);
     console.log('Random Dog image saved to file!');
   } catch (error) {
-    console.log(error);
+    throw error;
   }
+
+  return '2: READY';
 };
 
-getDogPic();
+// * Immediately-invoked Function Expression (IIFE for friends)
+(async () => {
+  try {
+    console.log('1: Will get dog pics!');
+    const response = await getDogPic();
+    console.log(response);
+    console.log('3: Done getting dog pics!');
+  } catch (error) {
+    console.log('ERROR 💣');
+  }
+})();
