@@ -9,4 +9,5 @@ Consuming promise using async/await and then method
  - Returning Values from async funtions
  - Waiting for multiple promises simulataneously
  
- # npm install 
+# Install dependencies
+ $ npm install
